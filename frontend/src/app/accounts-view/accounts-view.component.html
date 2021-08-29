@@ -1,2 +1,25 @@
-<mat-toolbar>
-</mat-toolbar>
+<div class="root-with-toolbar">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      Accounts:
+      <mat-select multiple style="width: 20%;">
+        <mat-option>Fuck</mat-option>
+        <mat-option>Fuck1</mat-option>
+      </mat-select>
+      <mat-select multiple style="width: 20%;">
+        <mat-option>You</mat-option>
+      </mat-select>
+      <span style="width: 60%;"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="fullHeight">
+    <ag-grid-angular
+      style="width: '100%'; height: '100%'; margin: 0;"
+      class="ag-theme-alpine"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+    >
+    </ag-grid-angular>
+  </div>
+</div>

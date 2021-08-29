@@ -7,7 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountsViewComponent implements OnInit {
 
+  rowData: any[] = []
+
+  columnDefs = [
+    {
+      field: 'name',
+      flex: 1
+    }
+  ]
+
   constructor() { }
+
 
   ngOnInit(): void {
   }

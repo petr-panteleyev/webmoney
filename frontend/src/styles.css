@@ -19,3 +19,9 @@ app-root {
   display: block;
   height: 100%;
 }
+
+.root-with-toolbar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

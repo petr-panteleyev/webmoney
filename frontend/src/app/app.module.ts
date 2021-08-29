@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 
 import { CategoryViewComponent } from './category-view/category-view.component';
 import { AccountsViewComponent } from './accounts-view/accounts-view.component';
@@ -39,7 +40,8 @@ import { TransactionViewComponent } from './transaction-view/transaction-view.co
     MatButtonModule,
     MatToolbarModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
