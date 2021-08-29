@@ -8,6 +8,7 @@ import org.panteleyev.webmoney.model.Category;
 import org.panteleyev.webmoney.repository.CategoryRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import java.util.UUID;
 import static org.panteleyev.webmoney.WebmoneyApplication.CATEGORY_ROOT;
 
 @Controller
+@CrossOrigin
 @RequestMapping(CATEGORY_ROOT)
 public class CategoryController {
     private final CategoryRepository categoryRepository;

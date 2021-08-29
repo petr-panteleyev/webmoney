@@ -5,6 +5,7 @@
 package org.panteleyev.webmoney.repository;
 
 import org.panteleyev.webmoney.model.Category;
+import org.panteleyev.webmoney.model.CategoryType;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,9 @@ public class CategoryRepository {
         var uuid = rs.getString("uuid");
         return new Category(
             UUID.fromString(uuid),
-            rs.getString("name")
+            rs.getString("name"),
+            CategoryType.valueOf(rs.getString("type")),
+            rs.getString("comment")
         );
     };
 

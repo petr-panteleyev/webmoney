@@ -8,6 +8,16 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Money Manager';
 
+  showTransactions = true
+  showAccounts = false
+
   onTransactions() {
+    this.showTransactions = true
+    this.showAccounts = false
+  }
+
+  onAccounts() {
+    this.showTransactions = false
+    this.showAccounts = true
   }
 }

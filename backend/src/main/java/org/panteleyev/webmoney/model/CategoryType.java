@@ -4,7 +4,12 @@
  */
 package org.panteleyev.webmoney.model;
 
-import java.util.UUID;
-
-public record Category(UUID uuid, String name, CategoryType type, String comment) {
+public enum CategoryType {
+    BANKS_AND_CASH,
+    INCOMES,
+    EXPENSES,
+    DEBTS,
+    PORTFOLIO,
+    ASSETS,
+    STARTUP
 }
