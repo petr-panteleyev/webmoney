@@ -6,7 +6,6 @@ import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {AccountDto, CardType} from "../model/account-dto";
 import {DataCacheService} from "../data-cache.service";
 import {formatDate} from "@angular/common";
-import {GridReadyEvent} from "ag-grid-community";
 
 class CardCell {
   constructor(public number: string, public type: CardType) {
@@ -142,9 +141,4 @@ export class AccountsViewComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  onGridReady(params: GridReadyEvent) {
-    params.api.sizeColumnsToFit();
-  }
-
 }
