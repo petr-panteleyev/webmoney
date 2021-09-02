@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@ngxs/store": "^3.7.2",
     "ag-grid-angular": "^26.0.0",
     "ag-grid-community": "^26.0.0",
     "rxjs": "~6.6.0",

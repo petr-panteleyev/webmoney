@@ -13,20 +13,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import static org.panteleyev.webmoney.repository.RepositoryUtil.getEnum;
+import static org.panteleyev.webmoney.repository.RepositoryUtil.getUuid;
 
 @Repository
 public class CategoryRepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
-    private final RowMapper<Category> rowMapper = (rs, i) -> {
-        var uuid = rs.getString("uuid");
-        return new Category(
-            UUID.fromString(uuid),
-            rs.getString("name"),
-            CategoryType.valueOf(rs.getString("type")),
-            rs.getString("comment")
-        );
-    };
+    private final RowMapper<Category> rowMapper = (rs, i) -> new Category(
+        getUuid(rs, "uuid"),
+        rs.getString("name"),
+        rs.getString("comment"),
+        getEnum(rs, "type", CategoryType.class),
+        getUuid(rs, "icon_uuid"),
+        rs.getLong("created"),
+        rs.getLong("modified")
+    );
 
     public CategoryRepository(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

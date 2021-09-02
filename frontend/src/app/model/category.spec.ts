@@ -1,7 +1,7 @@
-import { Category } from './category';
+import { CategoryDto } from './category-dto';
 
 describe('Category', () => {
   it('should create an instance', () => {
-    expect(new Category()).toBeTruthy();
+    expect(new CategoryDto()).toBeTruthy();
   });
 });

@@ -16,7 +16,9 @@ public class WebmoneyApplication {
 	public static final String API_ROOT = "/api/1.0.0";
 	public static final String VERSION_ROOT = "/version";
 	public static final String UI_ROOT = "/ui";
+	public static final String ACCOUNT_ROOT = API_ROOT + "/accounts";
 	public static final String CATEGORY_ROOT = API_ROOT + "/categories";
+	public static final String CURRENCY_ROOT = API_ROOT + "/currencies";
 
 	public static void main(String[] args) {
 		SpringApplication.run(WebmoneyApplication.class, args);

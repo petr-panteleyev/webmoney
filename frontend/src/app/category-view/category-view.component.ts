@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Category } from '../model/category';
-import { HttpService } from '../http.service';
+import {Component, OnInit} from '@angular/core';
+import {CategoryDto} from '../model/category-dto';
+import {DataCacheService} from "../data-cache.service";
 
 @Component({
   selector: 'app-category-view',
@@ -9,36 +9,37 @@ import { HttpService } from '../http.service';
 })
 export class CategoryViewComponent implements OnInit {
   columnDefs = [
-      {
-          field: 'uuid',
-          flex: 1
-      },
-      {
-          field: 'name',
-          sortable: true,
-          filter: 'agTextColumnFilter',
-          resizable: true,
-          flex: 1
-      },
-      {
-          field: 'type',
-          sortable: true,
-          flex: 1
-      },
-      {
-          field: 'comment',
-          flex: 2
-      }
+    {
+      field: 'uuid',
+      flex: 1
+    },
+    {
+      field: 'name',
+      sortable: true,
+      filter: 'agTextColumnFilter',
+      resizable: true,
+      flex: 1
+    },
+    {
+      field: 'type',
+      sortable: true,
+      flex: 1
+    },
+    {
+      field: 'comment',
+      flex: 2
+    }
   ];
 
-  rowData: Category[] = []
+  rowData: CategoryDto[] = []
 
-  constructor(private http: HttpService) {
+  constructor(private dataCache: DataCacheService) {
   }
 
   ngOnInit(): void {
-    this.http.getCategories().subscribe(
-        (data:Category[]) => this.rowData = data
-    )
+    this.dataCache.getCategoriesObservable().subscribe((data: CategoryDto[]) => {
+      this.rowData.length = 0
+      this.rowData.push(...data)
+    })
   }
 }
