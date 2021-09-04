@@ -2,9 +2,11 @@
  Copyright (c) Petr Panteleyev. All rights reserved.
  Licensed under the BSD license. See LICENSE file in the project root for full license information.
  */
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {DataCacheService} from "../data-cache.service";
 import {CurrencyDto} from "../model/currencyDto";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-currency-view',
@@ -12,28 +14,13 @@ import {CurrencyDto} from "../model/currencyDto";
   styleUrls: ['./currency-view.component.css']
 })
 export class CurrencyViewComponent implements OnInit {
-
-  columnDefs = [
-    {
-      field: 'uuid',
-      flex: 1
-    },
-    {
-      field: 'symbol',
-      sortable: true,
-      filter: 'agTextColumnFilter',
-      resizable: true,
-      flex: 1
-    },
-    {
-      field: 'description',
-      sortable: true,
-      flex: 1
-    }
-  ];
-
+  displayedColumns: string[] = ['uuid', 'symbol', 'description'];
 
   rowData: CurrencyDto[] = []
+  dataSource = new MatTableDataSource(this.rowData)
+
+  // @ts-ignore
+  @ViewChild(MatSort) sort: MatSort
 
   constructor(private dataCache: DataCacheService) {
   }
@@ -45,4 +32,7 @@ export class CurrencyViewComponent implements OnInit {
     })
   }
 
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
 }

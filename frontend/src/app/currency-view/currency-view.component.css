@@ -1,0 +1,11 @@
+table {
+  width: 100%;
+}
+
+.mat-column-uuid {
+  width: 20% !important;
+}
+
+.mat-column-symbol {
+  width: 10% !important;
+}

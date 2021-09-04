@@ -6,7 +6,6 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {HttpClientModule} from '@angular/common/http';
-import {AgGridModule} from 'ag-grid-angular';
 
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
@@ -27,6 +26,8 @@ import {TransactionViewComponent} from './transaction-view/transaction-view.comp
 import {CategoryState} from "./model/category-state";
 import { CategorySelectionBoxComponent } from './category-selection-box/category-selection-box.component';
 import {MatListModule} from "@angular/material/list";
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,6 @@ import {MatListModule} from "@angular/material/list";
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AgGridModule.withComponents([]),
     NgxsModule.forRoot([CategoryState]),
     MatSidenavModule,
     MatButtonModule,
@@ -53,7 +53,9 @@ import {MatListModule} from "@angular/material/list";
     MatSelectModule,
     MatCheckboxModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

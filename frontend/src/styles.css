@@ -1,4 +1,7 @@
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
+
 body {
   display: block;
   margin: 0;
@@ -12,7 +15,7 @@ body {
 .fullHeight {
   display: block;
   height: 100%;
-  margin: 100;
+  margin: 0;
 }
 
 app-root {
@@ -24,4 +27,13 @@ app-root {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+img.smallIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.number {
+  text-align: right;
 }

@@ -1,0 +1,39 @@
+table {
+  width: 100%;
+}
+
+.mat-column-name {
+  width: 15% !important;
+}
+
+.mat-column-category {
+  width: 10% !important;
+}
+
+.mat-column-currency {
+  width: 5% !important;
+}
+
+.mat-column-card {
+  width: 10% !important;
+}
+
+.mat-column-interest {
+  width: 3% !important;
+}
+
+.mat-column-until {
+  width: 5% !important;
+}
+
+.mat-column-comment {
+  width: 40% !important;
+}
+
+.mat-column-total {
+  width: 5% !important;
+}
+
+.mat-column-waiting {
+  width: 5% !important;
+}

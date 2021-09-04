@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CategoryDto} from '../model/category-dto';
 import {DataCacheService} from "../data-cache.service";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-category-view',
@@ -8,30 +10,13 @@ import {DataCacheService} from "../data-cache.service";
   styleUrls: ['./category-view.component.css']
 })
 export class CategoryViewComponent implements OnInit {
-  columnDefs = [
-    {
-      field: 'uuid',
-      flex: 1
-    },
-    {
-      field: 'name',
-      sortable: true,
-      filter: 'agTextColumnFilter',
-      resizable: true,
-      flex: 1
-    },
-    {
-      field: 'type',
-      sortable: true,
-      flex: 1
-    },
-    {
-      field: 'comment',
-      flex: 2
-    }
-  ];
+  displayedColumns: string[] = ['uuid', 'name', 'type', 'comment'];
 
   rowData: CategoryDto[] = []
+  dataSource = new MatTableDataSource(this.rowData)
+
+  // @ts-ignore
+  @ViewChild(MatSort) sort: MatSort
 
   constructor(private dataCache: DataCacheService) {
   }
@@ -41,5 +26,9 @@ export class CategoryViewComponent implements OnInit {
       this.rowData.length = 0
       this.rowData.push(...data)
     })
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 }
