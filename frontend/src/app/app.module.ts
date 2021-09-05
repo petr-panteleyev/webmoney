@@ -1,3 +1,7 @@
+/*
+ Copyright (c) Petr Panteleyev. All rights reserved.
+ Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ */
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
@@ -16,18 +20,19 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDividerModule} from '@angular/material/divider';
 
-import {NgxsModule} from '@ngxs/store';
-
 import {CategoryViewComponent} from './category-view/category-view.component';
 import {AccountsViewComponent} from './accounts-view/accounts-view.component';
 import {AccountsPageComponent} from './accounts-page/accounts-page.component';
 import {CurrencyViewComponent} from './currency-view/currency-view.component';
 import {TransactionViewComponent} from './transaction-view/transaction-view.component';
-import {CategoryState} from "./model/category-state";
-import { CategorySelectionBoxComponent } from './category-selection-box/category-selection-box.component';
+import {CategorySelectionBoxComponent} from './category-selection-box/category-selection-box.component';
 import {MatListModule} from "@angular/material/list";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {EntityStoreModule} from "./entity-store/entity-store.module";
+import {ContactsViewComponent} from './contacts-view/contacts-view.component';
 
 @NgModule({
   declarations: [
@@ -37,14 +42,14 @@ import {MatSortModule} from "@angular/material/sort";
     AccountsPageComponent,
     CurrencyViewComponent,
     TransactionViewComponent,
-    CategorySelectionBoxComponent
+    CategorySelectionBoxComponent,
+    ContactsViewComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxsModule.forRoot([CategoryState]),
     MatSidenavModule,
     MatButtonModule,
     MatToolbarModule,
@@ -55,9 +60,13 @@ import {MatSortModule} from "@angular/material/sort";
     MatDividerModule,
     MatListModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+    EntityStoreModule
   ],
   providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {

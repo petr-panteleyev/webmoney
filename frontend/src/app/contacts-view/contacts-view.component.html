@@ -1,0 +1,27 @@
+<div class="root-with-toolbar">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      Contacts
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="fullHeight"  style="overflow: auto;">
+    <table [dataSource]="dataSource" mat-table matSort>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let item">{{item.name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+        <td mat-cell *matCellDef="let item">{{item.type}}</td>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef>Phone</th>
+        <td mat-cell *matCellDef="let item">{{item.phone}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

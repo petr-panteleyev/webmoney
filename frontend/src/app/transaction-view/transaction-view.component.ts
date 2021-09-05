@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+/*
+ Copyright (c) Petr Panteleyev. All rights reserved.
+ Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ */
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-transaction-view',
@@ -7,9 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransactionViewComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
-
 }

@@ -3,10 +3,10 @@
  Licensed under the BSD license. See LICENSE file in the project root for full license information.
  */
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DataCacheService} from "../data-cache.service";
-import {CurrencyDto} from "../model/currencyDto";
+import {Currency} from "../model/currency";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
+import {CurrencyService} from "../entity-store/currency-service";
 
 @Component({
   selector: 'app-currency-view',
@@ -14,21 +14,19 @@ import {MatSort} from "@angular/material/sort";
   styleUrls: ['./currency-view.component.css']
 })
 export class CurrencyViewComponent implements OnInit {
-  displayedColumns: string[] = ['uuid', 'symbol', 'description'];
+  displayedColumns: string[] = ['symbol', 'description'];
 
-  rowData: CurrencyDto[] = []
-  dataSource = new MatTableDataSource(this.rowData)
+  dataSource = new MatTableDataSource<Currency>([])
 
   // @ts-ignore
   @ViewChild(MatSort) sort: MatSort
 
-  constructor(private dataCache: DataCacheService) {
+  constructor(private currencyService: CurrencyService) {
   }
 
   ngOnInit(): void {
-    this.dataCache.getCurrencies().subscribe((data: CurrencyDto[]) => {
-      this.rowData.length = 0
-      this.rowData.push(...data)
+    this.currencyService.entities$.subscribe((data: Currency[]) => {
+      this.dataSource.data = data
     })
   }
 

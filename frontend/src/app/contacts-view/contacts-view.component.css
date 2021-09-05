@@ -1,0 +1,11 @@
+table {
+  width: 100%;
+}
+
+.mat-column-name {
+  width: 20% !important;
+}
+
+.mat-column-type {
+  width: 10% !important;
+}

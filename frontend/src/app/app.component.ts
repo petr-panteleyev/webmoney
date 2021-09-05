@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+/*
+ Copyright (c) Petr Panteleyev. All rights reserved.
+ Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ */
+import {Component} from '@angular/core';
 import {DataCacheService} from "./data-cache.service";
 
 @Component({
@@ -11,6 +15,7 @@ export class AppComponent {
 
   showTransactions = true
   showAccounts = false
+  showContacts = false
 
   constructor(private dataCache: DataCacheService) {
   }
@@ -18,11 +23,19 @@ export class AppComponent {
   onTransactions() {
     this.showTransactions = true
     this.showAccounts = false
+    this.showContacts = false
   }
 
   onAccounts() {
     this.showTransactions = false
     this.showAccounts = true
+    this.showContacts = false
+  }
+
+  onContacts() {
+    this.showTransactions = false
+    this.showAccounts = false
+    this.showContacts = true
   }
 
   ngOnInit(): void {

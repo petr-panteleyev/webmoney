@@ -24,7 +24,7 @@
   <mat-option [value]="allCategoriesLabel">{{allCategoriesLabel.name}}</mat-option>
   <mat-divider></mat-divider>
   <mat-option
-    *ngFor="let category of categories"
+    *ngFor="let category of listItems"
     [value]="category"
   >
     {{category.name}}

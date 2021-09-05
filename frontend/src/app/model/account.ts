@@ -1,4 +1,8 @@
-import {CategoryType} from "./category-dto";
+/*
+ Copyright (c) Petr Panteleyev. All rights reserved.
+ Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ */
+import {CategoryType} from "./category";
 
 export enum CardType {
   NONE = "NONE",
@@ -8,7 +12,7 @@ export enum CardType {
   AMEX = "AMEX"
 }
 
-export class AccountDto {
+export class Account {
   constructor(
     public uuid: string,
     public name: string,

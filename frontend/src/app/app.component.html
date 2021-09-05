@@ -14,6 +14,11 @@
               (click)="onAccounts()">
         <mat-icon>money</mat-icon>
       </button>
+      <br>
+      <button mat-mini-fab
+              (click)="onContacts()">
+        <mat-icon>group</mat-icon>
+      </button>
     </mat-sidenav>
 
     <mat-sidenav-content>
@@ -23,6 +28,10 @@
 
       <div class="fullHeight" *ngIf="showAccounts">
         <app-accounts-page class="fullHeight"></app-accounts-page>
+      </div>
+
+      <div class="fullHeight" *ngIf="showContacts">
+        <app-contacts-view class="fullHeight"></app-contacts-view>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>

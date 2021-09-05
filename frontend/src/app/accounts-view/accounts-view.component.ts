@@ -3,11 +3,17 @@
  Licensed under the BSD license. See LICENSE file in the project root for full license information.
  */
 import {Component, Inject, LOCALE_ID, OnInit, ViewChild} from '@angular/core';
-import {AccountDto, CardType} from "../model/account-dto";
+import {Account, CardType} from "../model/account";
 import {DataCacheService} from "../data-cache.service";
 import {formatDate} from "@angular/common";
 import {MatTableDataSource} from "@angular/material/table";
-import {MatSort, MatSortable} from "@angular/material/sort";
+import {MatSort} from "@angular/material/sort";
+import {CurrencyService} from "../entity-store/currency-service";
+import {Dictionary} from "@ngrx/entity";
+import {Currency} from "../model/currency";
+import {Category} from "../model/category";
+import {CategoryService} from "../entity-store/category-service";
+import {AccountService} from "../entity-store/account-service";
 
 class CardCell {
   constructor(public number: string, public type: CardType) {
@@ -55,20 +61,31 @@ export class AccountsViewComponent implements OnInit {
     'comment', 'total', 'waiting'
   ];
 
+  currencyMap: Dictionary<Currency> = {}
+  categoryMap: Dictionary<Category> = {}
+  accounts: Account[] = []
+  accountFilter: (a: Account) => unknown = (value: Account) => true
+
   dataSource = new MatTableDataSource<AccountView>([])
   // @ts-ignore
   @ViewChild(MatSort) sort: MatSort
 
-  constructor(private dataCache: DataCacheService, @Inject(LOCALE_ID) private locale: string) {
+  constructor(
+    private dataCache: DataCacheService,
+    private currencyService: CurrencyService,
+    private categoryService: CategoryService,
+    private accountService: AccountService,
+    @Inject(LOCALE_ID) private locale: string
+  ) {
   }
 
-  private convertWithFilter(dto: AccountDto[], predicate: (value: AccountDto) => unknown): AccountView[] {
+  private convertWithFilter(dto: Account[], predicate: (value: Account) => unknown): AccountView[] {
     return dto
       .filter(predicate)
-      .map((acc: AccountDto) => new AccountView(
+      .map((acc: Account) => new AccountView(
         acc.name,
-        this.dataCache.getCurrency(acc.currencyUuid)?.symbol || "",
-        this.dataCache.getCategory(acc.categoryUuid)?.name || "",
+        this.currencyMap[acc.currencyUuid]?.symbol || "",
+        this.categoryMap[acc.categoryUuid]?.name || "",
         new CardCell(
           acc.cardNumber,
           acc.cardType
@@ -81,7 +98,7 @@ export class AccountsViewComponent implements OnInit {
       ))
   }
 
-  private formatClosingDate(dto: AccountDto): string {
+  private formatClosingDate(dto: Account): string {
     if (dto.closingDate == undefined) {
       return ""
     }
@@ -93,11 +110,29 @@ export class AccountsViewComponent implements OnInit {
     }
   }
 
-  onAccountFilterUpdate(filter: (a: AccountDto) => unknown) {
-    this.dataSource.data = this.convertWithFilter(this.dataCache.getAccounts(), filter)
+  onAccountFilterUpdate(filter: (a: Account) => unknown) {
+    this.accountFilter = filter
+    this.updateDataSource()
   }
 
   ngOnInit(): void {
+    this.currencyService.entityMap$.subscribe((map) => {
+      this.currencyMap = map
+      this.updateDataSource()
+    })
+    this.categoryService.entityMap$.subscribe((map) => {
+      this.categoryMap = map
+      this.updateDataSource()
+    })
+    this.accountService.entities$.subscribe((data) => {
+      this.accounts = data
+      this.updateDataSource()
+    })
+  }
+
+  private updateDataSource() {
+    console.log("*** UPDATE DATASOURCE")
+    this.dataSource.data = this.convertWithFilter(this.accounts, this.accountFilter)
   }
 
   ngAfterViewInit() {
