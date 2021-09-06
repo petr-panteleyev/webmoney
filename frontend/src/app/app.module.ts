@@ -33,6 +33,8 @@ import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {EntityStoreModule} from "./entity-store/entity-store.module";
 import {ContactsViewComponent} from './contacts-view/contacts-view.component';
+import {HttpUrlGenerator} from "@ngrx/data";
+import {CustomHttpUrlGenerator} from "./custom-http-url-generator";
 
 @NgModule({
   declarations: [
@@ -65,7 +67,12 @@ import {ContactsViewComponent} from './contacts-view/contacts-view.component';
     EffectsModule.forRoot([]),
     EntityStoreModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HttpUrlGenerator,
+      useClass: CustomHttpUrlGenerator
+    }
+  ],
 
   bootstrap: [AppComponent]
 })
