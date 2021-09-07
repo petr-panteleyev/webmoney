@@ -1,0 +1,39 @@
+table {
+  width: 100%;
+}
+
+.mat-column-uuid {
+  width: 20% !important;
+}
+
+.mat-column-day {
+  width: 5% !important;
+}
+
+.mat-column-type {
+  width: 10% !important;
+}
+
+.mat-column-debited {
+  width: 10% !important;
+}
+
+.mat-column-credited {
+  width: 10% !important;
+}
+
+.mat-column-counterparty {
+  width: 20% !important;
+}
+
+.mat-column-comment {
+  width: 35% !important;
+}
+
+.mat-column-amount {
+  width: 5% !important;
+}
+
+.mat-column-checked {
+  width: 5% !important;
+}

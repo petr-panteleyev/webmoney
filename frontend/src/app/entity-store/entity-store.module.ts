@@ -9,6 +9,7 @@ import {Currency} from "../model/currency";
 import {Category} from "../model/category";
 import {Account} from "../model/account";
 import {Contact} from "../model/contact";
+import {Transaction} from "../model/transaction";
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
   root: "http://localhost:8080/money/api/1.0.0"
@@ -26,19 +27,14 @@ export const entityMetadata: EntityMetadataMap = {
   },
   Contact: {
     selectId: (model: Contact) => model.uuid
+  },
+  Transaction: {
+    selectId: (model: Transaction) => model.uuid
   }
 };
 
-export const pluralNames = {
-  Currency: 'Currency',
-  Category: 'Category',
-  Account: 'Account',
-  Contact: 'Contact'
-}
-
 export const entityConfig: EntityDataModuleConfig = {
-  entityMetadata,
-  pluralNames
+  entityMetadata
 };
 
 @NgModule({

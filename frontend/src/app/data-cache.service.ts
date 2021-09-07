@@ -8,6 +8,7 @@ import {CategoryService} from "./entity-store/category-service";
 import {EntityServices} from "@ngrx/data";
 import {AccountService} from "./entity-store/account-service";
 import {ContactService} from "./entity-store/contact-service";
+import {TransactionService} from "./entity-store/transaction-service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class DataCacheService {
     private categoryService: CategoryService,
     private accountService: AccountService,
     private contactService: ContactService,
+    private transactionService: TransactionService,
     private entityService: EntityServices
   ) {
   }
@@ -38,5 +40,6 @@ export class DataCacheService {
     this.currencyService.getAll()
     this.accountService.getAll()
     this.contactService.getAll()
+    this.transactionService.getAll()
   }
 }
