@@ -21,6 +21,7 @@ public class WebmoneyApplication {
 	public static final String CURRENCY_ROOT = API_ROOT + "/currencies";
 	public static final String CONTACT_ROOT = API_ROOT + "/contacts";
 	public static final String TRANSACTION_ROOT = API_ROOT + "/transactions";
+	public static final String ICON_ROOT = API_ROOT + "/icons";
 
 	public static void main(String[] args) {
 		SpringApplication.run(WebmoneyApplication.class, args);

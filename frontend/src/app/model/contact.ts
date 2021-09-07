@@ -16,7 +16,8 @@ export class Contact {
     public uuid: string,
     public name: string,
     public type: ContactType,
-    public phone: string
+    public phone: string,
+    public iconUuid: string,
   ) {
   }
 }

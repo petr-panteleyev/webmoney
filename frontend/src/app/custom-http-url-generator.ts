@@ -11,7 +11,8 @@ export class CustomHttpUrlGenerator extends HttpUrlGenerator {
     "Category": "/categories",
     "Contact": "/contacts",
     "Currency": "/currencies",
-    "Transaction" : "/transactions"
+    "Transaction" : "/transactions",
+    "Icon" : "/icons"
   }
 
   collectionResource(entityName: string, root: string): string {

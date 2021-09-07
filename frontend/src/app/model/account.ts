@@ -26,7 +26,8 @@ export class Account {
     public total: number,
     public totalWaiting: number,
     public enabled: boolean,
-    public closingDate: Date
+    public closingDate: Date,
+    public iconUuid: string
   ) {
   }
 }
