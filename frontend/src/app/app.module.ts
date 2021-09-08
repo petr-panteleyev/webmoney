@@ -35,6 +35,8 @@ import {EntityStoreModule} from "./entity-store/entity-store.module";
 import {ContactsViewComponent} from './contacts-view/contacts-view.component';
 import {HttpUrlGenerator} from "@ngrx/data";
 import {CustomHttpUrlGenerator} from "./custom-http-url-generator";
+import {applicationStateReducer} from "./state/app-state";
+import {MonthAndYearSelectorComponent} from './month-and-year-selector/month-and-year-selector.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import {CustomHttpUrlGenerator} from "./custom-http-url-generator";
     CurrencyViewComponent,
     TransactionViewComponent,
     CategorySelectionBoxComponent,
-    ContactsViewComponent
+    ContactsViewComponent,
+    MonthAndYearSelectorComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,10 @@ import {CustomHttpUrlGenerator} from "./custom-http-url-generator";
     MatListModule,
     MatTableModule,
     MatSortModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({
+      app: applicationStateReducer
+    }, {
+    }),
     EffectsModule.forRoot([]),
     EntityStoreModule
   ],

@@ -3,13 +3,15 @@
  Licensed under the BSD license. See LICENSE file in the project root for full license information.
  */
 
+import {Dictionary} from "@ngrx/entity";
+
 export enum TransactionType {
-  CARD_PAYMENT= "CARD_PAYMENT",
+  CARD_PAYMENT = "CARD_PAYMENT",
   CASH_PURCHASE = "CASH_PURCHASE",
-  CHEQUE ="CHEQUE" ,
+  CHEQUE = "CHEQUE",
   WITHDRAWAL = "WITHDRAWAL",
-  CACHIER ="CACHIER",
-  DEPOSIT  = "DEPOSIT",
+  CACHIER = "CACHIER",
+  DEPOSIT = "DEPOSIT",
   TRANSFER = "TRANSFER",
   INTEREST = "INTEREST",
   DIVIDEND = "DIVIDEND",
@@ -20,6 +22,25 @@ export enum TransactionType {
   SALE = "SALE",
   REFUND = "REFUND",
   UNDEFINED = "UNDEFINED"
+}
+
+const typeTranslation: Dictionary<string> = {
+  CARD_PAYMENT : "Оплата по карте",
+  CASH_PURCHASE : "Покупка за наличные",
+  CHEQUE : "Чек",
+  WITHDRAWAL : "Снятие наличных",
+  CACHIER : "Транзакция в банкомате",
+  DEPOSIT : "Депозит",
+  TRANSFER : "Перевод",
+  INTEREST : "Проценты",
+  DIVIDEND : "Дивиденды",
+  DIRECT_BILLING : "Прямое дебетование",
+  CHARGE : "Списание",
+  FEE :"Комиссия",
+  INCOME : "Доход",
+  SALE : "Продажа",
+  REFUND : "Возврат",
+  UNDEFINED : "Неизвестно"
 }
 
 export class Transaction {
@@ -36,5 +57,9 @@ export class Transaction {
     public checked: boolean,
     public amount: number,
   ) {
+  }
+
+  static getTypeString(type: TransactionType): string {
+    return typeTranslation[type] || type
   }
 }

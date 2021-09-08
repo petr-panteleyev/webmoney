@@ -1,38 +1,44 @@
-<mat-select
-  [(value)]="selectedOption"
-  (valueChange)="categoryTypeSelected($event)"
->
-  <mat-option
-    *ngFor="let item of combinedCategoryTypeOptions"
-    [value]="item"
-  >
-    {{item.name}}
-  </mat-option>
-  <mat-divider></mat-divider>
-  <mat-option
-    *ngFor="let item of categoryTypeOptions"
-    [value]="item"
-  >
-    {{item.name}}
-  </mat-option>
-</mat-select>
+<ng-container>
+  <mat-form-field style="width: auto !important;">
+    <mat-select style="max-width: 100%;"
+      [(value)]="selectedOption"
+      (valueChange)="categoryTypeSelected($event)"
+    >
+      <mat-option
+        *ngFor="let item of combinedCategoryTypeOptions"
+        [value]="item"
+      >
+        {{item.name}}
+      </mat-option>
+      <mat-divider></mat-divider>
+      <mat-option
+        *ngFor="let item of categoryTypeOptions"
+        [value]="item"
+      >
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<mat-select
-  [(value)]="selectedCategory"
-  (valueChange)="onCategorySelected($event)"
->
-  <mat-option [value]="allCategoriesLabel">{{allCategoriesLabel.name}}</mat-option>
-  <mat-divider></mat-divider>
-  <mat-option
-    *ngFor="let category of listItems"
-    [value]="category"
-  >
-    {{category.name}}
-  </mat-option>
-</mat-select>
+  <mat-form-field>
+    <mat-select
+      [(value)]="selectedCategory"
+      (valueChange)="onCategorySelected($event)"
+    >
+      <mat-option [value]="allCategoriesLabel">{{allCategoriesLabel.name}}</mat-option>
+      <mat-divider></mat-divider>
+      <mat-option
+        *ngFor="let category of listItems"
+        [value]="category"
+      >
+        {{category.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<mat-checkbox [(ngModel)]="showDeactivatedAccounts"
-              (change)="onShowDeactivatedAccount($event.checked)"
->
-  Show deactivated accounts
-</mat-checkbox>
+  <mat-checkbox [(ngModel)]="showDeactivatedAccounts"
+                (change)="onShowDeactivatedAccount($event.checked)"
+  >
+    Show deactivated accounts
+  </mat-checkbox>
+</ng-container>

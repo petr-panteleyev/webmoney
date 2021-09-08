@@ -15,6 +15,9 @@ import {Contact} from "../model/contact";
 import {DefaultDataServiceConfig, HttpUrlGenerator} from "@ngrx/data";
 import {CategoryService} from "../entity-store/category-service";
 import {Category} from "../model/category";
+import {Store} from "@ngrx/store";
+import {selectTransactionMonthAndYear} from "../state/app-state";
+import {setStartingYear} from "../state/common-actions";
 
 class TransactionListItem {
   constructor(
@@ -34,11 +37,6 @@ class TransactionListItem {
     public creditorIconUuid: string | undefined
   ) {
   }
-}
-
-interface MonthOption {
-  index: number,
-  name: string
 }
 
 @Component({
@@ -64,31 +62,14 @@ export class TransactionViewComponent implements OnInit {
     'checked'
   ];
 
-  months: string[] = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ]
-
-  years: number[] = []
-
-  day: number
-  month: number
-  year: number
+  month: number = 0
+  year: number = 0
 
   // @ts-ignore
   @ViewChild(MatSort) sort: MatSort
 
   constructor(
+    private store: Store,
     private categoryService: CategoryService,
     private accountService: AccountService,
     private contactService: ContactService,
@@ -96,10 +77,6 @@ export class TransactionViewComponent implements OnInit {
     private urlGenerator: HttpUrlGenerator,
     private dataServiceConfig: DefaultDataServiceConfig
   ) {
-    let today = new Date()
-    this.day = today.getDate()
-    this.month = today.getMonth()
-    this.year = today.getFullYear()
   }
 
   private filterAndConvert(transactions: Transaction[]): TransactionListItem[] {
@@ -123,7 +100,7 @@ export class TransactionViewComponent implements OnInit {
 
         return new TransactionListItem(
           t.uuid,
-          t.type,
+          Transaction.getTypeString(t.type),
           t.comment,
           t.day,
           t.month,
@@ -138,14 +115,6 @@ export class TransactionViewComponent implements OnInit {
           creditedIcon
         )
       })
-  }
-
-  onMonthChanged() {
-    this.dataSource.data = this.filterAndConvert(this.transactions)
-  }
-
-  onYearChanged() {
-    this.dataSource.data = this.filterAndConvert(this.transactions)
   }
 
   ngOnInit(): void {
@@ -166,12 +135,23 @@ export class TransactionViewComponent implements OnInit {
 
     this.transationService.entities$.subscribe((data) => {
       this.transactions = data
-      let years = this.transactions
-        .map((t) => t.year)
-      this.years = years.filter((n, i) => years.indexOf(n) === i)
-        .sort()
-
       this.dataSource.data = this.filterAndConvert(data)
+
+      // This must be an effect
+      let minYear = Math.min(...data.map((t => t.year)))
+      if (minYear != Infinity) {
+        this.store.dispatch(
+          setStartingYear({
+            year: minYear
+          })
+        )
+      }
+    })
+
+    this.store.select(selectTransactionMonthAndYear).subscribe((monthAndYear) => {
+      this.month = monthAndYear.month
+      this.year = monthAndYear.year
+      this.dataSource.data = this.filterAndConvert(this.transactions)
     })
   }
 

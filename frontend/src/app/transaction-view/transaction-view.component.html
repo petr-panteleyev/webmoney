@@ -1,16 +1,8 @@
 <div class="root-with-toolbar">
   <mat-toolbar>
     <mat-toolbar-row>
-      <mat-select [(value)]="month" (valueChange)="onMonthChanged()">
-        <mat-option *ngFor="let m of months; let i = index" [value]="i">
-          {{months[i]}}
-        </mat-option>
-      </mat-select>
-      <mat-select [(value)]="year" (valueChange)="onYearChanged()">
-        <mat-option *ngFor="let y of years" [value]="y">
-          {{y}}
-        </mat-option>
-      </mat-select>
+      <app-month-and-year-selector></app-month-and-year-selector>
+      <span class="spacer"></span>
     </mat-toolbar-row>
   </mat-toolbar>
 
