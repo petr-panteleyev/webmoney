@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import java.util.UUID;
@@ -31,10 +34,25 @@ public class CurrencyController {
         return ResponseEntity.ok(currencyRepository.getCurrencies());
     }
 
+    @PostMapping
+    public ResponseEntity<Currency> postCurrency(@RequestBody Currency currency) {
+        // TODO: add to database
+        var c = new Currency.Builder(currency)
+            .uuid(UUID.randomUUID())
+            .build();
+        return ResponseEntity.ok(c);
+    }
+
     @GetMapping("/{uuid}")
     public ResponseEntity<Currency> getCurrency(@PathVariable("uuid") UUID uuid) {
         return currencyRepository.getCurrency(uuid)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{uuid}")
+    public ResponseEntity<Currency> putCurrency(@RequestBody Currency currency) {
+        // TODO: add to database
+        return ResponseEntity.ok(currency);
     }
 }

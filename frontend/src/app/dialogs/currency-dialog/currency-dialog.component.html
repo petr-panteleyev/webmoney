@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Валюта</h1>
+<div mat-dialog-content >
+  <form style="margin: 10px;" [formGroup]="form">
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Символ</mat-label>
+      <input matInput formControlName="symbol">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Описание</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+    <div style="display: flex;flex-direction: row">
+      <mat-form-field appearance="fill">
+        <mat-label>Курс</mat-label>
+        <input matInput type="number" formControlName="rate">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="direction">
+          <mat-option [value]="0">/</mat-option>
+          <mat-option [value]="1">*</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-checkbox formControlName="useThousandSeparator">Показывать разделитель тысяч</mat-checkbox>
+    </div>
+    <div>
+      <mat-checkbox formControlName="def">Валюта по умолчанию</mat-checkbox>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button cdkFocusInitial (click)="onOk()">Ok</button>
+</div>

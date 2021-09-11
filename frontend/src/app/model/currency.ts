@@ -6,7 +6,11 @@ export class Currency {
   constructor(
     public uuid: string,
     public symbol: string,
-    public description: string
+    public description: string,
+    public rate: number,
+    public useThousandSeparator: boolean,
+    public def: boolean,
+    public direction: number
   ) {
   }
 }

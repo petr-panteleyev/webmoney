@@ -4,7 +4,7 @@
  */
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -37,6 +37,10 @@ import {HttpUrlGenerator} from "@ngrx/data";
 import {CustomHttpUrlGenerator} from "./custom-http-url-generator";
 import {applicationStateReducer} from "./state/app-state";
 import {MonthAndYearSelectorComponent} from './month-and-year-selector/month-and-year-selector.component';
+import {CurrencyDialogComponent} from './dialogs/currency-dialog/currency-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatInputModule} from "@angular/material/input";
+import {DataEffects} from "./state/data-effects";
 
 @NgModule({
   declarations: [
@@ -48,11 +52,13 @@ import {MonthAndYearSelectorComponent} from './month-and-year-selector/month-and
     TransactionViewComponent,
     CategorySelectionBoxComponent,
     ContactsViewComponent,
-    MonthAndYearSelectorComponent
+    MonthAndYearSelectorComponent,
+    CurrencyDialogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MatSidenavModule,
@@ -68,10 +74,11 @@ import {MonthAndYearSelectorComponent} from './month-and-year-selector/month-and
     MatSortModule,
     StoreModule.forRoot({
       app: applicationStateReducer
-    }, {
-    }),
-    EffectsModule.forRoot([]),
-    EntityStoreModule
+    }, {}),
+    EffectsModule.forRoot([DataEffects]),
+    EntityStoreModule,
+    MatDialogModule,
+    MatInputModule
   ],
   providers: [
     {

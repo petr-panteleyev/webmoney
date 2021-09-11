@@ -17,7 +17,6 @@ import {CategoryService} from "../entity-store/category-service";
 import {Category} from "../model/category";
 import {Store} from "@ngrx/store";
 import {selectTransactionMonthAndYear} from "../state/app-state";
-import {setStartingYear} from "../state/common-actions";
 
 class TransactionListItem {
   constructor(
@@ -136,16 +135,6 @@ export class TransactionViewComponent implements OnInit {
     this.transationService.entities$.subscribe((data) => {
       this.transactions = data
       this.dataSource.data = this.filterAndConvert(data)
-
-      // This must be an effect
-      let minYear = Math.min(...data.map((t => t.year)))
-      if (minYear != Infinity) {
-        this.store.dispatch(
-          setStartingYear({
-            year: minYear
-          })
-        )
-      }
     })
 
     this.store.select(selectTransactionMonthAndYear).subscribe((monthAndYear) => {

@@ -14,7 +14,7 @@ import {CategoryService} from "../entity-store/category-service";
   styleUrls: ['./category-view.component.css']
 })
 export class CategoryViewComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'type', 'comment'];
+  displayedColumns: string[] = ['type', 'name', 'comment'];
 
   dataSource = new MatTableDataSource<Category>([])
 

@@ -20,7 +20,7 @@ export class CustomHttpUrlGenerator extends HttpUrlGenerator {
   }
 
   entityResource(entityName: string, root: string): string {
-    return this.collectionResource(entityName, root)
+    return this.collectionResource(entityName, root) + "/"
   }
 
   registerHttpResourceUrls(entityHttpResourceUrls?: EntityHttpResourceUrls): void {

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {setTransactionMonthAndDate} from "../state/common-actions";
-import {selectStartingYear, selectTransactionMonthAndYear} from "../state/app-state";
+import {selectTransactionMonthAndYear} from "../state/app-state";
 
 @Component({
   selector: 'app-month-and-year-selector',
@@ -9,35 +9,17 @@ import {selectStartingYear, selectTransactionMonthAndYear} from "../state/app-st
   styleUrls: ['./month-and-year-selector.component.css']
 })
 export class MonthAndYearSelectorComponent implements OnInit {
-  endYear = new Date().getFullYear()
+  monthString = ""
 
   month: number = 0
   year: number = 0
 
-  years : number[] = []
-  months: string[] = [
-    'январь',
-    'февраль',
-    'март',
-    'апрель',
-    'май',
-    'июнь',
-    'июль',
-    'август',
-    'сентябрь',
-    'октябрь',
-    'ноябрь',
-    'декабрь'
-  ]
-
   constructor(private store: Store) {
   }
 
-  onMonthChanged() {
-    this.post()
-  }
-
-  onYearChanged() {
+  onDateChanged() {
+    this.year = Number(this.monthString.substr(0, 4))
+    this.month = Number(this.monthString.substr(5)) - 1
     this.post()
   }
 
@@ -79,16 +61,16 @@ export class MonthAndYearSelectorComponent implements OnInit {
     )
   }
 
+  private static makeDateString(month: number, year: number) : string {
+    let m = month + 1
+    return `${year}-` + (m < 10 ? `0${m}` : `${m}`)
+  }
+
   ngOnInit(): void {
     this.store.select(selectTransactionMonthAndYear).subscribe((monthAndYear) => {
+      this.monthString = MonthAndYearSelectorComponent.makeDateString(monthAndYear.month, monthAndYear.year)
       this.month = monthAndYear.month
       this.year = monthAndYear.year
-    })
-
-    this.store.select(selectStartingYear).subscribe((year) => {
-      this.years = Array(this.endYear - year + 1)
-        .fill(1)
-        .map((x, i) => year + i)
     })
   }
 }

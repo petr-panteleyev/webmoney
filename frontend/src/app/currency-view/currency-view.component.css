@@ -2,6 +2,11 @@ table {
   width: 100%;
 }
 
+.mat-column-select {
+  overflow: initial;
+  width: 5% !important;
+}
+
 .mat-column-uuid {
   width: 20% !important;
 }

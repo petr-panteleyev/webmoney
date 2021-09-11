@@ -4,13 +4,9 @@
  */
 import {createAction, props} from "@ngrx/store";
 import {MonthAndYear} from "./app-state";
+import {ActionType} from "./action-type";
 
 export const setTransactionMonthAndDate = createAction(
-  '[App State] Set transaction view month and year',
+  ActionType.SET_TRANSACTION_MONTH_AND_YEAR,
   props<{ monthAndYear: MonthAndYear }>()
-)
-
-export const setStartingYear = createAction(
-  '[App State] Set starting year',
-  props<{ year: number }>()
 )

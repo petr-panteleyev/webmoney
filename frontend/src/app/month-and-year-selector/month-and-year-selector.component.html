@@ -8,18 +8,9 @@
   <button mat-mini-fab (click)="nextMonth()">
     <mat-icon>arrow_right</mat-icon>
   </button>
-  <mat-form-field style="margin-left: 10px;">
-    <mat-select [(value)]="month" (valueChange)="onMonthChanged()">
-      <mat-option *ngFor="let m of months; let i = index" [value]="i">
-        {{months[i]}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field style="margin-left: 10px;">
-    <mat-select [(value)]="year" (valueChange)="onYearChanged()">
-      <mat-option *ngFor="let y of years" [value]="y">
-        {{y}}
-      </mat-option>
-    </mat-select>
+  <mat-form-field>
+    <input matInput type="month" [(ngModel)]="monthString" (change)="onDateChanged()"
+           style="margin-right: 10px"
+    >
   </mat-form-field>
 </ng-container>
