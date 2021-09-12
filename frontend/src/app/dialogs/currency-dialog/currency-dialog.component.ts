@@ -30,28 +30,15 @@ export class CurrencyDialogComponent implements OnInit {
 
   getResult(): Currency {
     let value = this.form.value
-
-    if (this.currency == undefined) {
-      return new Currency(
-        "",
-        value.symbol,
-        value.description,
-        value.rate,
-        value.useThousandSeparator,
-        value.def,
-        value.direction
-      )
-    } else {
-      return new Currency(
-        this.currency.uuid,
-        value.symbol,
-        value.description,
-        value.rate,
-        value.useThousandSeparator,
-        value.def,
-        value.direction
-      )
-    }
+    return new Currency(
+      this.currency == undefined ? "" : this.currency.uuid,
+      value.symbol,
+      value.description,
+      value.rate,
+      value.useThousandSeparator,
+      value.def,
+      value.direction
+    )
   }
 
   onOk() {
