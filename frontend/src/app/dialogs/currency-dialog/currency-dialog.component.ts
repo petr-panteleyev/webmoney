@@ -1,9 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Currency} from "../../model/currency";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
-import {createCurrencyAction, updateCurrencyAction} from "../../state/data-actions";
 
 export interface CurrencyDialogData {
   currency: Currency | undefined
@@ -29,40 +28,38 @@ export class CurrencyDialogComponent implements OnInit {
     this.currency = data.currency
   }
 
-  onOk() {
-    if (this._symbol?.hasError('required')) {
-      return
-    }
-
+  getResult(): Currency {
     let value = this.form.value
 
     if (this.currency == undefined) {
-      this.store.dispatch(createCurrencyAction({
-        currency: new Currency(
-          "",
-          value.symbol,
-          value.description,
-          value.rate,
-          value.useThousandSeparator,
-          value.def,
-          value.direction
-        )
-      }))
+      return new Currency(
+        "",
+        value.symbol,
+        value.description,
+        value.rate,
+        value.useThousandSeparator,
+        value.def,
+        value.direction
+      )
     } else {
-      this.store.dispatch(updateCurrencyAction({
-        currency: new Currency(
-          this.currency.uuid,
-          value.symbol,
-          value.description,
-          value.rate,
-          value.useThousandSeparator,
-          value.def,
-          value.direction
-        )
-      }))
+      return new Currency(
+        this.currency.uuid,
+        value.symbol,
+        value.description,
+        value.rate,
+        value.useThousandSeparator,
+        value.def,
+        value.direction
+      )
+    }
+  }
+
+  onOk() {
+    if (this.form.invalid) {
+      return
     }
 
-    this.dialogRef.close()
+    this.dialogRef.close(this.getResult())
   }
 
   onCancel() {
@@ -71,7 +68,7 @@ export class CurrencyDialogComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      symbol: [this.currency?.symbol || "", []],
+      symbol: [this.currency?.symbol || "", [Validators.required]],
       description: [this.currency?.description || "", []],
       direction: [this.currency?.direction || 0, []],
       def: [this.currency?.def || false, []],

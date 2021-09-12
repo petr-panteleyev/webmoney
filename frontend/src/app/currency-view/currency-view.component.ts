@@ -7,9 +7,10 @@ import {Currency} from "../model/currency";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {CurrencyService} from "../entity-store/currency-service";
-import {MatDialog} from "@angular/material/dialog";
-import {CurrencyDialogComponent} from "../dialogs/currency-dialog/currency-dialog.component";
 import {SelectionModel} from "@angular/cdk/collections";
+import {Store} from "@ngrx/store";
+import {openCurrencyDialogAction} from "../state/dialog-actions";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-currency-view',
@@ -20,30 +21,27 @@ export class CurrencyViewComponent implements OnInit {
   displayedColumns: string[] = ['select', 'symbol', 'description'];
 
   // Selection
-  initialSelection = [];
-  allowMultiSelect = false;
-  selection = new SelectionModel<Currency>(this.allowMultiSelect, this.initialSelection);
+  selection = new SelectionModel<Currency>(false, []);
 
   dataSource = new MatTableDataSource<Currency>([])
 
   // @ts-ignore
   @ViewChild(MatSort) sort: MatSort
 
-  constructor(private currencyService: CurrencyService, public dialog: MatDialog) {
+  constructor(private store: Store, private currencyService: CurrencyService, private dialog:MatDialog) {
   }
 
   onNew() {
-    const dialogRef = this.dialog.open(CurrencyDialogComponent, {
-      data: { currency: undefined }
-    })
+    this.store.dispatch(openCurrencyDialogAction({
+      currency: undefined
+    }))
   }
 
   onEdit() {
-    const dialogRef = this.dialog.open(CurrencyDialogComponent, {
-      data: { currency: this.selection.selected[0] || undefined }
-    })
+    this.store.dispatch(openCurrencyDialogAction({
+      currency: this.selection.selected[0]
+    }))
   }
-
 
   ngOnInit(): void {
     this.currencyService.entities$.subscribe((data: Currency[]) => {

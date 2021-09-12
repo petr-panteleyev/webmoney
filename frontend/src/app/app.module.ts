@@ -41,6 +41,7 @@ import {CurrencyDialogComponent} from './dialogs/currency-dialog/currency-dialog
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatInputModule} from "@angular/material/input";
 import {DataEffects} from "./state/data-effects";
+import {DialogEffects} from "./state/dialog-actions";
 
 @NgModule({
   declarations: [
@@ -75,7 +76,7 @@ import {DataEffects} from "./state/data-effects";
     StoreModule.forRoot({
       app: applicationStateReducer
     }, {}),
-    EffectsModule.forRoot([DataEffects]),
+    EffectsModule.forRoot([DataEffects, DialogEffects]),
     EntityStoreModule,
     MatDialogModule,
     MatInputModule

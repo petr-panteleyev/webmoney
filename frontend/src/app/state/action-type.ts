@@ -7,5 +7,7 @@ export enum ActionType {
   CREATE_CONTACT = "[Data] Create Contact",
   UPDATE_CONTACT = "[Data] Update Contact",
   CREATE_CURRENCY = "[Data] Create Currency",
-  UPDATE_CURRENCY = "[Data] Update Currency"
+  UPDATE_CURRENCY = "[Data] Update Currency",
+  // Dialogs
+  OPEN_CURRENCY_DIALOG = "[Dialog] Currency"
 }

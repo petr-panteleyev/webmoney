@@ -1,8 +1,15 @@
 <div class="root-with-toolbar">
   <mat-toolbar>
     <mat-toolbar-row>
-      <button mat-raised-button color="primary" (click)="onNew()">New</button>
-      <button mat-raised-button color="primary" (click)="onEdit()">Редактировать</button>
+      <button mat-raised-button color="primary"
+              (click)="onNew()">
+        Создать
+      </button>
+      <button mat-raised-button color="primary"
+              (click)="onEdit()"
+              [disabled]="selection.isEmpty()">
+        Редактировать
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
   <div class="fullHeight">
